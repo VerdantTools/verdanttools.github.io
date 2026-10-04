@@ -1,0 +1,71 @@
+/* 1. Clean import: Only Roboto Regular (400) and Bold (700) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: #fafafa;
+}
+
+/* 2. Main Full-Screen Paste Area */
+.pastearea {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    border: 2px dashed #ccc; 
+    border-radius: 2px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.pastearea p {
+    font-size: 18pt;
+    color: #444;
+    margin: 0;
+    line-height: 1.8;
+}
+
+.pastearea p span {
+    background-color: #333232;
+    box-shadow: inset 1px 2px 0px #a9a9a9;
+    color: #fff;
+    border-bottom: 4px solid #1a1a1a;
+    min-width: 20px;
+    padding: 2px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    display: inline-block;
+    user-select: none;
+    vertical-align: middle;
+    transition: transform 0.05s ease, border-width 0.05s ease;
+}
+
+.pastearea p span:active {
+    border-bottom-width: 1px;
+    transform: translateY(3px);
+    box-shadow: inset 1px 1px 0px #777;
+}
+
+/* 5. Subdued Inline Link Text */
+.pastearea p .textpaste {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    color: #0066cc;
+    text-transform: none;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 400;
+}
