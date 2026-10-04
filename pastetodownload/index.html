@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paste Image to Download - PNG, JPG & WebP</title>
+    <meta property="og:title" content="Paste Image to Download" />
+    <meta
+      name="description"
+      content="Paste an image and download it as PNG, JPG or WebP."
+    />
+    <link
+      rel="canonical"
+      href="https://verdanttools.github.io/PasteToDownload/"
+    />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="pastearea">
+      <main>
+        <p>
+          <span>Ctrl</span> <span>V</span> to paste <br />or<br />
+          <span class="textpaste">Paste a link here</span>
+        </p>
+        <div class="bottom">
+          <p>Options</p>
+          <div class="options">
+            <div class="filename">
+              <input
+                type="text"
+                id="filename-input"
+                placeholder="Filename (optional)"
+              />
+            </div>
+            <div class="format">
+              <button class="active" data-format="image/png">PNG</button>
+              <button data-format="image/jpeg">JPG</button>
+              <button data-format="image/webp">WebP</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    
+    <script src="index.js"></script>
+  </body>
+</html>
