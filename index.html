@@ -6,7 +6,6 @@
     <title>Paste to Download</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
     <div class="pastearea">
       <p>
@@ -14,16 +13,20 @@
         <span class="textpaste">Paste a link here</span>
       </p>
       <div class="bottom">
-        <p>Options:</p>
+        <p>Options</p>
         <div class="options">
-            <div class="filename">
-                <input>
-            </div>
-            <div class="format">
-                <button class="active" data-format="image/png">PNG</button>
-                <button data-format="image/jpeg">JPG</button>
-                <button data-format="image/webp">WebP</button>
-            </div>
+          <div class="filename">
+            <input
+              type="text"
+              id="filename-input"
+              placeholder="Filename (optional)"
+            />
+          </div>
+          <div class="format">
+            <button class="active" data-format="image/png">PNG</button>
+            <button data-format="image/jpeg">JPG</button>
+            <button data-format="image/webp">WebP</button>
+          </div>
         </div>
       </div>
     </div>

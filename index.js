@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const keySpans = document.querySelectorAll('.pastearea p span');
+    let selectedFormat = 'image/png'; 
+
+    // Format selection buttons
+    document.querySelectorAll('.format button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            document.querySelectorAll('.format button').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            selectedFormat = e.target.dataset.format;
+        });
+    });
     
     document.addEventListener('paste', async (event)=> {
         animateKeycaps();
@@ -16,10 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const file = item.getAsFile();
 
                 if (file) {
-                    const ext = item.type.split('/')[1] || 'png';
-                    const filename = `pasted-image-${Date.now()}.${ext}`;
-
-                    triggerDownload(file, filename);
+                    await convertAndDownload(file);
                     imageHandled = true;
                     break;
                 }
@@ -33,16 +40,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     const response = await fetch(pastedText);
                     const blob = await response.blob();
-                    const ext = blob.type.split('/')[1] || 'jpg';
-                    const filename = `downloaded-image-${Date.now()}.${ext}`;
-
-                    triggerDownload(blob, filename);
+                    await convertAndDownload(blob);
                 } catch (err) {
                     window.open(pastedText, '_blank');
                 }
             }
         }
     });
+
+    async function convertAndDownload(blobOrFile) {
+        const objectUrl = URL.createObjectURL(blobOrFile);
+        const img = new Image();
+
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            
+            // Fill background with white if converting transparency to JPG
+            if (selectedFormat === 'image/jpeg') {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            ctx.drawImage(img, 0, 0);
+
+            const dataUrl = canvas.toDataURL(selectedFormat, 0.92);
+            
+            let ext = 'png';
+            if (selectedFormat === 'image/jpeg') ext = 'jpg';
+            if (selectedFormat === 'image/webp') ext = 'webp';
+
+            const input = document.getElementById('filename-input');
+            const customName = input.value.trim().replace(/[<>:"/\\|?*]/g, '');
+            const filename = `${customName || `pasted-image-${Date.now()}`}.${ext}`;
+
+            const anchor = document.createElement('a');
+            anchor.href = dataUrl;
+            anchor.download = filename;
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+
+            URL.revokeObjectURL(objectUrl);
+        };
+
+        img.onerror = () => {
+            // Fallback to direct trigger if image loading fails
+            const ext = selectedFormat.split('/')[1] || 'png';
+            triggerDownload(blobOrFile, `pasted-image-${Date.now()}.${ext}`);
+            URL.revokeObjectURL(objectUrl);
+        };
+
+        img.src = objectUrl;
+    }
 
     function isImageUrl(url) {
         return /^https?:\/\/.*\.(jpeg|jpg|gif|png|webp|svg)(\?.*)?$/i.test(url) ||
@@ -75,17 +127,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, 150);
     }
-
-    let selectedFormat = 'image/png'; 
-
-    document.querySelectorAll('.format button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            // Remove active class from all
-            document.querySelectorAll('.format button').forEach(b => b.classList.remove('active'));
-            // Add to clicked one
-            e.target.classList.add('active');
-            // Update format state
-            selectedFormat = e.target.dataset.format;
-        });
-    });
 });
