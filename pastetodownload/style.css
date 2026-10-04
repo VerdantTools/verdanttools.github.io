@@ -25,7 +25,9 @@ body {
     box-sizing: border-box;
     background-color: #ffffff;
 }
-
+.hidden {
+    display: none;
+}
 .pastearea p {
     font-size: 21.6pt;
     color: #444;
@@ -34,10 +36,10 @@ body {
 }
 
 .pastearea p span {
-    background-color: #333232;
-    box-shadow: inset 1.2px 2.4px 0px #a9a9a9;
+    background-color: #292929;
+    box-shadow: inset 0px 2px 0px #d2d2d2;
     color: #fff;
-    border-bottom: 4.8px solid #1a1a1a;
+    border-bottom:5px solid #0a0a0a;
     min-width: 24px;
     padding: 2.4px 9.6px;
     cursor: pointer;
@@ -86,17 +88,32 @@ body {
 
 .bottom {
     position: absolute;
-    bottom: 12px;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
+@media (max-width: 800px) {
+    .options {
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+}
 .options {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 9.6px;
     margin-top: 9.6px;
+    
 }
-
+.options button {
+    margin: 2px;
+}
 .filename input {
     width: 216px;
     box-sizing: border-box;
