@@ -69,3 +69,19 @@ body {
     cursor: pointer;
     font-weight: 400;
 }
+
+.format button {
+    background: #222;
+    color: #888;
+    border: 1px solid #333;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.format button.active {
+    background: #3b82f6; /* Accent blue */
+    color: #fff;
+    border-color: #3b82f6;
+}

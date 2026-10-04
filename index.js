@@ -75,4 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, 150);
     }
+
+    let selectedFormat = 'image/png'; 
+
+    document.querySelectorAll('.format button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            // Remove active class from all
+            document.querySelectorAll('.format button').forEach(b => b.classList.remove('active'));
+            // Add to clicked one
+            e.target.classList.add('active');
+            // Update format state
+            selectedFormat = e.target.dataset.format;
+        });
+    });
 });
