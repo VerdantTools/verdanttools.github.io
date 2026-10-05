@@ -62,7 +62,7 @@ body {
 
 .paste-message span:active {
     position: relative;
-    top: 4px;
+    top: 3px;
     background-color: #0467fc;
     border-bottom-color: #002c6d;
     border-bottom-width: 4px;
