@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://verdanttools.vercel.app/sitemap.xml
+Sitemap: https://simpletools.freedev.app/sitemap.xml
