@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://verdanttools.github.io/</loc>
+    <loc>https://verdanttoolsgithubio.vercel.app/</loc>
     <lastmod>2026-10-05T05:19:02+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://verdanttools.github.io/about-us/</loc>
+    <loc>https://verdanttoolsgithubio.vercel.app/about-us/</loc>
     <lastmod>2026-10-05T05:19:02+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://verdanttools.github.io/PasteToDownload/</loc>
+    <loc>https://verdanttoolsgithubio.vercel.app/PasteToDownload/</loc>
     <lastmod>2026-10-05T05:19:02+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
