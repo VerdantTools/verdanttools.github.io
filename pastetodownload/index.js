@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const keySpans = document.querySelectorAll(".pastearea p span");
   let selectedFormat = "image/png";
+  const statusEl = document.querySelector("h1.hidden");
 
   // Format selection buttons
   document.querySelectorAll(".format button").forEach((button) => {
@@ -12,6 +13,55 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedFormat = e.target.dataset.format;
     });
   });
+
+  async function processUrl(url) {
+    statusEl.style.display = "block";
+    statusEl.innerHTML = "Downloading...";
+
+    try {
+      const proxyUrl =
+        "https://api.allorigins.win/raw?url=" +
+        encodeURIComponent(url);
+
+      const response = await fetch(proxyUrl);
+
+      if (!response.ok) throw new Error("Proxy request failed");
+
+      const blob = await response.blob();
+
+      if (!blob.type.startsWith("image/")) {
+        throw new Error("URL did not return an image");
+      }
+
+      const input = document.getElementById("filename-input");
+
+      if (!input.value.trim()) {
+        try {
+          const urlObj = new URL(url);
+          let name = urlObj.pathname.split("/").pop();
+
+          if (name) {
+            name = decodeURIComponent(name);
+            name = name.replace(/\.[^/.]+$/, "");
+            input.value = name;
+          }
+        } catch(e) {
+          console.error("Failed to parse filename from URL", e);
+        }
+      }
+      
+      await convertAndDownload(blob);
+      statusEl.innerHTML = "Success!";
+    } catch (err) {
+      console.error(err);
+      statusEl.innerHTML = "Failed download";
+      window.open(url, "_blank");
+    }
+    
+    setTimeout(() => {
+      statusEl.style.display = "none";
+    }, 3000);
+  }
 
   document.addEventListener("paste", async (event) => {
     animateKeycaps();
@@ -28,7 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const file = item.getAsFile();
 
         if (file) {
+          statusEl.style.display = "block";
+          statusEl.innerHTML = "Downloading...";
           await convertAndDownload(file);
+          statusEl.innerHTML = "Success!";
+          setTimeout(() => {
+            statusEl.style.display = "none";
+          }, 3000);
+          
           imageHandled = true;
           break;
         }
@@ -39,40 +96,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const pastedText = event.clipboardData.getData("text")?.trim();
 
       if (pastedText && /^https?:\/\//i.test(pastedText)) {
-        try {
-          const proxyUrl =
-            "https://api.allorigins.win/raw?url=" +
-            encodeURIComponent(pastedText);
+        await processUrl(pastedText);
+      }
+    }
+  });
 
-          const response = await fetch(proxyUrl);
-
-          if (!response.ok) throw new Error("Proxy request failed");
-
-          const blob = await response.blob();
-
-          if (!blob.type.startsWith("image/")) {
-            throw new Error("URL did not return an image");
-          }
-
-          const input = document.getElementById("filename-input");
-
-          if (!input.value.trim()) {
-            const url = new URL(pastedText);
-            let name = url.pathname.split("/").pop();
-
-            if (name) {
-              name = decodeURIComponent(name);
-              name = name.replace(/\.[^/.]+$/, "");
-              input.value = name;
-            }
-          }
-          document.querySelector("h1.hidden").style.display = "block";
-          await convertAndDownload(blob);
-        } catch (err) {
-          console.error(err);
-          document.querySelector("h1.hidden").innerHTML = "Failed download";
-          window.open(pastedText, "_blank");
-        }
+  const urlInput = document.querySelector(".textpaste input");
+  urlInput.addEventListener("keydown", async (e) => {
+    if (e.key === 'Enter') {
+      const url = urlInput.value.trim();
+      if (/^https?:\/\//i.test(url)) {
+        await processUrl(url);
       }
     }
   });
@@ -123,13 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     img.src = objectUrl;
-  }
-
-  function isImageUrl(url) {
-    return (
-      /^https?:\/\/.*\.(jpeg|jpg|gif|png|webp|svg)(\?.*)?$/i.test(url) ||
-      /^data:image\/(png|jpeg|webp|gif);base64,/i.test(url)
-    );
   }
 
   function triggerDownload(blobOrFile, filename) {

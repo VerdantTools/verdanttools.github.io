@@ -114,7 +114,13 @@ body {
 .options button {
     margin: 2px;
 }
-.filename input {
+.pastearea input {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    flex:1;
+}
+.filename input, input {
     width: 216px;
     box-sizing: border-box;
     background: #fff;
