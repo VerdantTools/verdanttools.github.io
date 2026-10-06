@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Shadow Generator</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <h2>CSS Shadow Generator</h2>
+    </nav>
+
+    <main>
+      <div class="tool-container">
+        <section class="controls">
+          <h1 class="title">Shadow Settings</h1>
+
+          <div class="control">
+            <label for="offset-x">Horizontal Offset</label>
+
+            <div class="range-row">
+              <input
+                id="offset-x"
+                class="range"
+                type="range"
+                min="-100"
+                max="100"
+                value="10"
+              />
+
+              <input
+                id="offset-x-number"
+                class="number"
+                type="number"
+                value="10"
+              />
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="offset-y">Vertical Offset</label>
+
+            <div class="range-row">
+              <input
+                id="offset-y"
+                class="range"
+                type="range"
+                min="-100"
+                max="100"
+                value="10"
+              />
+
+              <input
+                id="offset-y-number"
+                class="number"
+                type="number"
+                value="10"
+              />
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="blur">Blur Radius</label>
+
+            <div class="range-row">
+              <input
+                id="blur"
+                class="range"
+                type="range"
+                min="0"
+                max="100"
+                value="20"
+              />
+
+              <input id="blur-number" class="number" type="number" value="20" />
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="spread">Spread Radius</label>
+
+            <div class="range-row">
+              <input
+                id="spread"
+                class="range"
+                type="range"
+                min="-50"
+                max="50"
+                value="0"
+              />
+
+              <input
+                id="spread-number"
+                class="number"
+                type="number"
+                value="0"
+              />
+            </div>
+          </div>
+
+          <div class="control">
+            <label>Shadow Color</label>
+
+            <div class="color-row">
+              <input id="color" class="color" type="color" value="#000000" />
+
+              <input
+                id="color-text"
+                class="color-text"
+                type="text"
+                value="#000000"
+                maxlength="7"
+              />
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="opacity">Opacity</label>
+
+            <div class="range-row">
+              <input
+                id="opacity"
+                class="range"
+                type="range"
+                min="0"
+                max="100"
+                value="25"
+              />
+
+              <input
+                id="opacity-number"
+                class="number"
+                type="number"
+                value="25"
+              />
+            </div>
+          </div>
+
+          <div class="control">
+            <label class="checkbox-row">
+              <input id="inset" type="checkbox" />
+
+              Inset Shadow
+            </label>
+          </div>
+        </section>
+
+        <section class="preview">
+          <div id="preview-box" class="preview-box">Preview</div>
+        </section>
+      </div>
+
+      <section class="output">
+        <h2 class="output-title">CSS</h2>
+
+        <textarea id="code" class="code" readonly></textarea>
+
+        <button id="copy-button" class="copy-button" type="button">
+          Copy CSS
+        </button>
+      </section>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>
