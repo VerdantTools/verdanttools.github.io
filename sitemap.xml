@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
   <url>
     <loc>https://untitledbase.dpdns.org/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
+
+  <!-- About -->
   <url>
     <loc>https://untitledbase.dpdns.org/about-us/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
+
+  <!-- Paste to Download -->
   <url>
     <loc>https://untitledbase.dpdns.org/PasteToDownload/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
+
+  <!-- CSS Shadow Maker -->
   <url>
     <loc>https://untitledbase.dpdns.org/CssShadowMaker/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
+
 </urlset>
